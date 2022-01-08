@@ -1,0 +1,259 @@
+<!DOCTYPE HTML><html>
+<head>
+  <title id="title"></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="icon"  type="image/png" href="favicon.ico">
+  <script src="/script.js"></script>
+</head>
+<body>
+    <div class="topnav">
+        <h1 id="friendlyName"></h1>
+        <button class="button" onclick="logoutButton()">Logout</button>
+      <button class="button" onclick="setup()">Setup</button>
+        <button class="button" onclick="update()">Upgrade firmware</button>
+      <button class="button" onclick="reboot()">Reboot device</button>
+      
+      </div>
+
+  <div class="content">
+    <div class="card-grid">
+        <div class="card">             
+            <p class="card-title"> strip led</p>
+            <label class="switch">
+                <input type="checkbox" onchange="toggleCheckbox(this)" id="output0">
+                <span class="slider"></span>
+            </label>
+            <p class ="state">State: <span id="output0s"></span></p>
+        </div>
+    </div>
+
+        <div class="card">             
+            <p class="card-title"> color & Brightness</p>
+            <table style="margin-left:auto;margin-right:auto;border:1px solid black;">
+                <tr><td>
+                    <input type="range" min="0" max="255" value="127" id="brightnessSlider">
+                </td>
+            <td style="text-align:right"> 
+                Brightness: <span id="brightnessVal"></span>
+            </td>
+            <td style="text-align:left;width:50px">
+                <button type="button" id="white" style="width:50px;background-color: white" onclick="clickWhite()">White</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="range" min="0" max="255" value="127" id="redSlider">
+            </td>
+            <td style="text-align:right;color:red">
+                Red: <span id="redVal"></span>
+            </td>
+            <td style="text-align:left;width:50px">
+                <button type="button" id="red" style="width:50px;background-color: red" onclick="clickRed()">Red</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="range" min="0" max="255" value="127" id="greenSlider">
+            </td>
+            <td style="text-align:right;color:green">
+                Green: <span id="greenVal"></span>
+            </td>
+            <td style="text-align:left;width:50px">
+                <button type="button" id="green" style="width:50px;background-color: green" onclick="clickGreen()">Green</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="range" min="0" max="255" value="127" id="blueSlider">
+            </td>
+            <td style="text-align:right;color:blue">
+                Blue: <span id="blueVal"></span>
+            </td>
+            <td style="text-align:left;width:50px">
+                <button type="button" id="blue" style="width:50px;background-color: blue" onclick="clickBlue()">Blue</button>
+            </td>
+        </tr>
+            </table>
+    
+        </div>
+        
+    </div>
+    <div ><span id="msghd"></span><span id="message"></span></div>
+</div>
+
+<script>
+var gateway = `ws://${window.location.hostname}/ws`;
+var websocket;
+var LED_STATUS;
+window.addEventListener('load', onLoad);
+var sliderBrightness = document.getElementById("brightnessSlider");
+var outputBrightness = document.getElementById("brightnessVal");
+outputBrightness.innerHTML = sliderBrightness.value;
+
+sliderBrightness.oninput = function() {
+    outputBrightness.innerHTML = this.value;
+    websocket.send('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+    console.log('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+}
+
+var sliderRed = document.getElementById("redSlider");
+var outputRed = document.getElementById("redVal");
+outputRed.innerHTML = sliderRed.value;
+
+sliderRed.oninput = function() {
+    outputRed.innerHTML = this.value;
+    websocket.send('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+    console.log('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+}
+var sliderGreen = document.getElementById("greenSlider");
+var outputGreen = document.getElementById("greenVal");
+outputGreen.innerHTML = sliderGreen.value;
+
+sliderGreen.oninput = function() {
+    outputGreen.innerHTML = this.value;
+    websocket.send('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+    console.log('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+}
+var sliderBlue = document.getElementById("blueSlider");
+var outputBlue = document.getElementById("blueVal");
+outputBlue.innerHTML = sliderBlue.value;
+
+sliderBlue.oninput = function() {
+    outputBlue.innerHTML = this.value;
+    websocket.send('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+    console.log('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+}
+
+function clickWhite(){
+    sliderRed.value=255;  
+    sliderGreen.value=255;
+    sliderBlue.value=255;  
+    outputRed.innerHTML = 255;
+    outputGreen.innerHTML =255;
+    outputBlue.innerHTML = 255;
+    websocket.send('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+    console.log('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+}
+function clickRed(){
+    sliderRed.value=255;
+    sliderGreen.value=0;
+    sliderBlue.value=0; 
+    outputRed.innerHTML = 255;
+    outputGreen.innerHTML =0;
+    outputBlue.innerHTML = 0;  
+    websocket.send('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+    console.log('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+}
+function clickGreen(){
+    sliderRed.value=0;
+    sliderGreen.value=255;
+    sliderBlue.value=0; 
+    outputRed.innerHTML = 0;
+    outputGreen.innerHTML =255;
+    outputBlue.innerHTML = 0;
+    websocket.send('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+    console.log('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+}
+
+function clickBlue(){
+    sliderRed.value=0;
+    sliderGreen.value=0;
+    sliderBlue.value=255;
+    outputRed.innerHTML = 0;
+    outputGreen.innerHTML =0;
+    outputBlue.innerHTML = 255;
+    websocket.send('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+    console.log('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+}
+
+function onLoad(event) {
+    initWebSocket();
+}
+
+function initWebSocket() {
+    console.log('Trying to open a WebSocket connection...');
+    websocket = new WebSocket(gateway);
+    websocket.onopen    = onOpen;
+    websocket.onclose   = onClose;
+    websocket.onmessage = onMessage;
+}
+
+function onOpen(event) {
+    console.log('Connection opened');
+    websocket.send("states");
+}
+  
+function onClose(event) {
+    console.log('Connection closed');
+    setTimeout(initWebSocket, 2000);
+} 
+
+function onMessage(event) {
+    console.log(event.data);
+    var myObj = JSON.parse(event.data); 
+    if (myObj.hasOwnProperty('LED_STATUS')){
+        document.getElementById("msghd").innerHTML = "";
+        document.getElementById("message").innerHTML = event.data;
+        myVar = setTimeout(clearMessage, 5000);
+        if (myObj.LED_STATUS==true){
+                document.getElementById("output0").checked = true;
+                document.getElementById("output0s").innerHTML = "ON";
+            }
+        else if(myObj.LED_STATUS==false){
+                document.getElementById("output0").checked = false;
+                document.getElementById("output0s").innerHTML = "OFF";
+            }
+            LED_STATUS=myObj.LED_STATUS;
+            sliderBrightness.value=myObj.brightness;
+            outputBrightness.innerHTML = myObj.brightness;
+            sliderRed.value=myObj.red;
+            outputRed.innerHTML = myObj.red;
+            sliderGreen.value=myObj.green;
+            outputGreen.innerHTML = myObj.green;
+            sliderBlue.value=myObj.blue;
+            outputBlue.innerHTML = myObj.blue;
+    }
+
+    else if (myObj.hasOwnProperty('message')){
+        document.getElementById("msghd").innerHTML = "Message:";
+        document.getElementById("message").innerHTML = myObj.message;
+        myVar = setTimeout(clearMessage, 5000);
+    }
+}
+
+function clearMessage(){
+    document.getElementById("message").innerHTML = "";
+    document.getElementById("msghd").innerHTML = "";
+}
+
+// Send Requests to Control GPIOs
+function toggleCheckbox (element) {
+    console.log(element.id);
+   
+    if (element.checked){
+        document.getElementById(element.id+"s").innerHTML = "ON";
+        LED_STATUS=true;
+        websocket.send('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+        console.log('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+    }
+    else {
+        document.getElementById(element.id+"s").innerHTML = "OFF"; 
+        LED_STATUS=false;
+        websocket.send('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+        console.log('{\"LED_STATUS\":'+ LED_STATUS+',"mode":"light","red":'+sliderRed.value+',"green":'+sliderGreen.value+',"blue":'+sliderBlue.value+',"brightness":'+sliderBrightness.value+'}');
+    }
+}
+    var req = new XMLHttpRequest();
+    req.open('GET', document.location, false);
+    req.send(null);
+    var headers = req.getAllResponseHeaders();
+    console.log(headers);
+    document.getElementById('title').innerHTML=req.getResponseHeader("ESPhostname");  
+    document.getElementById('friendlyName').innerHTML=req.getResponseHeader("FriendlyName");
+
+</script>
+
+
+</body>
+</html>
