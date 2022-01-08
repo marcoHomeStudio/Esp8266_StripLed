@@ -8,7 +8,7 @@
 
 Based on the popular esp8266-01 module ad arduino IDE,
 
-The idea is to make a a WS2812 led driver  by using 2 gpio's as data pin to drive the LED with the Adafruit_NeoPixel library.
+The idea is to make a a WS2812 led driver  by using 2 gpio's as data pin to drive the LED with the **Adafruit_NeoPixel library**.
 
 The device can publish and subscribe to an MQTT broker to allow remote control of the module.
 
@@ -20,7 +20,7 @@ The web server html and css and js file are stored in the Data directory.
 
 ## Installation
 
-Copy the following ino files **ESP8266_4output_OTA.ino**, **LittleFS.ino**, **MQTT.ini**, **Webpage.ino**, **Webserver.ino** and the **data** folder to your Arduino sketch folder.
+Copy the following ino files **ESP8266_StripLed.ino**, **LittleFS.ino**, **MQTT.ino**, **Webpage.ino**, **Webserver.ino** and the **data** folder to your Arduino sketch folder.
 
 Compile and Upload the sketch from Arduino IDE
 
@@ -43,7 +43,7 @@ The following libraries must be installed:
 -  [AsyncElegantOTA](https://github.com/ayushsharma82/AsyncElegantOTA)
 
 -  [Pub sub client Nick O'Leary](https://github.com/knolleary/pubsubclient)
--  [Adafruit neo pixel library] (https://github.com/adafruit/Adafruit_NeoPixel)
+-  [Adafruit neo pixel library](https://github.com/adafruit/Adafruit_NeoPixel)
 
 # running the first time
 
@@ -61,9 +61,9 @@ Once you click on ***Save config*** button, the device wil reboot and switch in 
 
 # Electrical diagram
 
-![schematic](./Doc/Esp8266-01_4Outputfzz_schem.png)
+![schematic](./Doc/Schematic_8266 ESP-01 WS2812 2xStrip led 5V external_2022-01-08m.png)
 
-![Breadboard](./Doc/Esp8266-01_4Outputfzz_bb.png)
+![PCB](./Doc/PCB_PCB_8266 ESP-01 WS2812 2xStrip led 5V external_2_2022-01-08.png)
 
 # Factory reset
 
@@ -93,8 +93,6 @@ You can access the device setup by clicking on the Setup button on the main page
  - ***MQTT client id***:  Your MQTT client id
  - ***MQTT Publish topic***: Topic used by the device as publish channel
  - ***MQTT Subscribe topic***: Topic used by the device as subscribe channel 
- - ***Output0 friendly name***: Friendly name display on the http interface
- - ***Reverse***: check box, Reverse mode of the GPIO   true: output is reverse "HIGH" to "LOW"
 
 You can reset the module to Factory default by clicking on the button ***Reset to factory default***
 
@@ -102,7 +100,8 @@ You can reset the module to Factory default by clicking on the button ***Reset t
 
 The MQTT flow is based on a json String formatted as follow:
 
-***{"output0":"0","output1":"0","output2":"1","output3":"0"}***
+***{"LED_STATUS":"state1","mode":"mode","red":255,"green":255,"blue":255,"brightness":255}***
+
 
 Where "output0" is connected to the Esp8266-01 module GPIO0 etc...
 
