@@ -1,4 +1,4 @@
-# ESP8266_4Output-OTA-MQTT-with-Arduino-IDE
+# ESP8266_2_Strip_Led_Output-OTA-MQTT-with-Arduino-IDE
 
 ## Arduino IDE DEV platform with OTA and MQTT based on ESP8266-01
 
@@ -8,9 +8,8 @@
 
 Based on the popular esp8266-01 module ad arduino IDE,
 
-The idea is to make a programmable platform using the 4 gpio's as digital output/Input.
+The idea is to make a a WS2812 led driver  by using 2 gpio's as data pin to drive the LED.
 
-It can be easily connected to any module like 4 relay module boards or anything needed to be driven by digital output.
 
 The device can publish and subscribe to an MQTT broker to allow remote control of the module.
 
