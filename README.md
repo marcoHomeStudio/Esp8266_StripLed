@@ -152,6 +152,7 @@ All the parameters are store in the file config.json store in the data partition
 
     {
    "init":true,
+   
    "APname":"Esp8266-StripLed",
    "APkey":"123456789",
    "ESPhostname":"<YOUR HOSTNAME>",
@@ -176,9 +177,6 @@ The init field is selecting the device mode.
 True= device initialization, the device is set in AP mode.
 
 False= Device normal mode, the device start in wifi station mode and the device parameters are read and apply from the config.json file.
-
-output0Friendlyname: from 0 to 3. friendly name diplay on the http interface
-  
 
 
 # Schematic and PCB available on easyeda
