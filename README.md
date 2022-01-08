@@ -8,8 +8,7 @@
 
 Based on the popular esp8266-01 module ad arduino IDE,
 
-The idea is to make a a WS2812 led driver  by using 2 gpio's as data pin to drive the LED.
-
+The idea is to make a a WS2812 led driver  by using 2 gpio's as data pin to drive the LED with the Adafruit_NeoPixel library.
 
 The device can publish and subscribe to an MQTT broker to allow remote control of the module.
 
@@ -44,6 +43,7 @@ The following libraries must be installed:
 -  [AsyncElegantOTA](https://github.com/ayushsharma82/AsyncElegantOTA)
 
 -  [Pub sub client Nick O'Leary](https://github.com/knolleary/pubsubclient)
+-  [Adafruit neo pixel library] (https://github.com/adafruit/Adafruit_NeoPixel)
 
 # running the first time
 
