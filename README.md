@@ -181,7 +181,9 @@ output0Friendlyname: from 0 to 3. friendly name diplay on the http interface
   
 
 
-# Alternate Diagram with 220VAc/5VDC power supply 0.6A
+# Schematic and PCB available on easyeda
+  - [ESP8266-01-WS2812-2xStrip-Led](https://easyeda.com/marco487160/8266-esp-01-programmer_copy_copy)
+  -[ESP8266-01WS2812 2xStrip220/5Vdc](https://easyeda.com/marco487160/8266-esp-01-programmer)
 
 ![Schematic2](./Doc/Schematic2.png)
 
