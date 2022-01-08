@@ -148,11 +148,10 @@ I have try to use mDNS service to use the device with a .local name but i have v
 
 # config.json file
 
-All the parameters are store in the file config.json store in the data partition.
+All the parameters are store in the file config.json store in the data partition:
 
-    {
+{
    "init":true,
-   
    "APname":"Esp8266-StripLed",
    "APkey":"123456789",
    "ESPhostname":"<YOUR HOSTNAME>",
@@ -168,8 +167,6 @@ All the parameters are store in the file config.json store in the data partition
    "mqtt1ClientId":"<MQTT CLIENT ID>",
    "mqtt1Topic1":"<MQTT PUBLISH TOPIC>",
    "mqtt1Topic2":"<MQTT SUBSCRIBE TOPIC>"
-   
-   
 }
 
 The init field is selecting the device mode.
