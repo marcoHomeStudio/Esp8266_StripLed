@@ -63,7 +63,7 @@ Once you click on ***Save config*** button, the device wil reboot and switch in 
 
 ![schematic](./Doc/Schematic_8266 ESP-01 WS2812_2xStrip_led_5V_external_2022-01-08m.png)
 
-![PCB](./Doc/PCB_PCB_8266 ESP-01 WS2812_2xStrip_led_5V_external_2_2022-01-08.png)
+![PCB](./Doc/PCB_PCB_8266_ESP-01 WS2812_2xStrip_led_5V_external_2_2022-01-08.png)
 
 # Factory reset
 
