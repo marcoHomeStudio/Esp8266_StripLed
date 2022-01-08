@@ -141,7 +141,7 @@ browse to this folder and copy the bin file into your arduino sketch folder.
 
 # Networking consideration
 
-The code assume that you are using a DHCCP server on your main router on your network and expect to have an IP address automatically delivered by the DHCP server.
+The code assume that you are using a DHCP server on your main router on your network and expect to have an IP address automatically delivered by the DHCP server.
 The Host name should be automatically read by you router. If you can't reach your device by its hostname you should connect to your main router and look for any new IP address given by the DHCP service.
 
 I have try to use mDNS service to use the device with a .local name but i have very unreliable and mitigated result with the ESP8266 MCU. It seem to work better with ESP32 MCU.
@@ -151,31 +151,25 @@ I have try to use mDNS service to use the device with a .local name but i have v
 All the parameters are store in the file config.json store in the data partition.
 
     {
-    "init":true,
-    "APname":"Esp8266-4Output",
-    "APkey":"123456789",
-    "ESPhostname":"<YOUR  HOSTNAME>",
-    "friendlyName":"<YOUR  FRIENDLY  NAME>",
-    "SSID":"<YOUR  AP",
-    "wifikey":"<YOURWIFIKEY>",
-    "username":"admin",
-    "password":"12345",
-    "mqtt1Server":"<YOUR  MQTT  SERVER>",
-    "mqtt1Port":1883,
-    "mqtt1User" : "<YOUR  MQTT  USER>",
-    "mqtt1Password":"<YOUR  MQTT  PASSWORD",
-    "mqtt1ClientId":"<YOUR  MQT  TCLIENT  ID>",
-    "mqtt1Topic1":"<MQTT  PUBLISH  TOPIC>",
-    "mqtt1Topic2":"<MQTT  SUBSCRIBE  TOPIC>",
-    "output0Friendlyname":"output0",
-    "output1Friendlyname":"output1",
-    "output2Friendlyname":"output2",
-    "output3Friendlyname":"output3",
-    "output0reverse":false,
-    "output1reverse":false,
-    "output2reverse":false,
-    "output3reverse":false
-    }
+   "init":true,
+   "APname":"Esp8266-StripLed",
+   "APkey":"123456789",
+   "ESPhostname":"<YOUR HOSTNAME>",
+   "friendlyName":"<YOUR FRIENDLY NAME>",
+   "SSID":"<YOUR SSID>",
+   "wifikey":"<YOUR WIFI KEY>",
+   "username":"admin",
+   "password":"12345",
+   "mqtt1Server":"<MQTT SERVER>",
+   "mqtt1Port":1883,
+   "mqtt1User" : "<MQTT USER>",
+   "mqtt1Password":"<MQTT PASSWORD>",
+   "mqtt1ClientId":"<MQTT CLIENT ID>",
+   "mqtt1Topic1":"<MQTT PUBLISH TOPIC>",
+   "mqtt1Topic2":"<MQTT SUBSCRIBE TOPIC>"
+   
+   
+}
 
 The init field is selecting the device mode.
 
@@ -184,29 +178,12 @@ True= device initialization, the device is set in AP mode.
 False= Device normal mode, the device start in wifi station mode and the device parameters are read and apply from the config.json file.
 
 output0Friendlyname: from 0 to 3. friendly name diplay on the http interface
-
-output0reverse: from 0 to 3 select the gpio reverse mode
-true: output is reverse "HIGH" to "LOW"
   
-# To do
 
-I will improve the following in the future.
 
-1. Implementing my own OTA interface to be able to automatically redirect to the Home page after successful update
-2. Adding MQTT port in the setup form
-3. (maybe) implementing TLS connection for the MQTT broker
-4. (maybe) implementing HTTPS connection for the internal webserver.
+# Alternate Diagram with 220VAc/5VDC power supply 0.6A
 
-# Alternate Diagram The 4 channel relay Module
+![4chrelayModuleSchematic](./Doc/scematic2.png)
 
-![4chrelayModuleSchematic](./Doc/Esp8266-01_4RelayBoard_schem.png)
+![4chrelayModuleSchematicBreadboard](./Doc/PCB2.png)
 
-![4chrelayModuleSchematicBreadboard](./Doc/Esp8266-01_4RelayBoard_bb.png)
-
-<!--stackedit_data:
-
-eyJoaXN0b3J5IjpbMjY3Mzg4OTU5LC0yMDc4OTgzNDQxLC0yMD
-
-g3NTYzMzBdfQ==
-
--->
