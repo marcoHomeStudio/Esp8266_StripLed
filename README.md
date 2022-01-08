@@ -49,7 +49,7 @@ The following libraries must be installed:
 
 When you power the device just after having uploaded the data folder the config.json file put the module in init=true state. That mean that the module bootup as an access point.
 
-The access point name is by default ***Esp8266-4Output*** and the password is ***123456789*** you can modify this value to your taste by modifying the file /data/config.json
+The access point name is by default ***stripled*** and the password is ***123456789*** you can modify this value to your taste by modifying the file /data/config.json
 
 ![init](./Doc/init.png)
 
@@ -61,9 +61,9 @@ Once you click on ***Save config*** button, the device wil reboot and switch in 
 
 # Electrical diagram
 
-![schematic](./Doc/Schematic_8266 ESP-01 WS2812 2xStrip led 5V external_2022-01-08m.png)
+![schematic](./Doc/Schematic_8266 ESP-01 WS2812_2xStrip_led_5V_external_2022-01-08m.png)
 
-![PCB](./Doc/PCB_PCB_8266 ESP-01 WS2812 2xStrip led 5V external_2_2022-01-08.png)
+![PCB](./Doc/PCB_PCB_8266 ESP-01 WS2812_2xStrip_led_5V_external_2_2022-01-08.png)
 
 # Factory reset
 
