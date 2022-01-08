@@ -183,7 +183,7 @@ output0Friendlyname: from 0 to 3. friendly name diplay on the http interface
 
 # Alternate Diagram with 220VAc/5VDC power supply 0.6A
 
-![4chrelayModuleSchematic](./Doc/scematic2.png)
+![Schematic2](./Doc/Schematic2.png)
 
-![4chrelayModuleSchematicBreadboard](./Doc/PCB2.png)
+![PCB2](./Doc/PCB2.png)
 
