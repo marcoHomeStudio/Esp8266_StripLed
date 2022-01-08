@@ -100,22 +100,16 @@ You can reset the module to Factory default by clicking on the button ***Reset t
 
 The MQTT flow is based on a json String formatted as follow:
 
-***{"LED_STATUS":"state1","mode":"mode","red":255,"green":255,"blue":255,"brightness":255}***
+***{"LED_STATUS":bool,"mode":"light","red":255,"green":255,"blue":255,"brightness":255}***
 
 
-Where "output0" is connected to the Esp8266-01 module GPIO0 etc...
+Where "LED_STATUS" true for LED ON and false for LED OFF
 
-"***output0***" value of the property represent the output state 
+"mode" is set to "light" for normal light. it will be used in future dev for animations or pattern etc..
+"red", "green", "blue", "brightness are integer from 0 to 255. 
+The module is publishing the Led status,mode, RGB and brightness via the json string formatted above on the ***MQTT Publish topic*** every time any state or values are modified either by the web interface or via the MQTT subscribed channel.
 
- - "*1"="ON" /"HIGH"* or *"0"="OFF"/"LOW"*
-
-if reverse is selected:
-
- - "*0"="ON" /"HIGH"* or *"1"="OFF"/"LOW"*
-
-The module is publishing the output state via the json string formatted above on the ***MQTT Publish topic*** every time any state of the 4 output is modified either by the web interface or via the MQTT subscribed channel.
-
-It publishes the output state during startup, when the http default page have been open and on 1 minute regular bases.
+It publishes the the Led status,mode, RGB and brightness during startup, when the http default page have been open and on 1 minute regular bases.
 
 The module listen to the ***MQTT Subscribe topic*** and is expecting the Json string formatted as described above. It changes the output state according to the Json string.
 
